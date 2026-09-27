@@ -363,6 +363,11 @@
 					<param name="ImageNumber" value="9">
 					</OBJECT>
 				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Windows Terminalを開く">
+					<param name="Local" value="res\HLP000381.html">
+					<param name="ImageNumber" value="9">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
 					<param name="Name" value="最近使ったファイル">
 					<param name="Local" value="res\HLP000029.html">
 					<param name="ImageNumber" value="9">

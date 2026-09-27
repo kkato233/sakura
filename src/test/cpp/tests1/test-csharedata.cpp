@@ -758,6 +758,7 @@ MATCHER(IsInitializedCommonSettingCustomMenu, "Checks if CommonSetting_CustomMen
 		SMenuItem{ F_OPEN_COMMAND_PROMPT_AS_ADMIN, 'w' },
 		SMenuItem{ F_OPEN_POWERSHELL, 'P' },
 		SMenuItem{ F_OPEN_POWERSHELL_AS_ADMIN, 'p' },
+		SMenuItem{ F_OPEN_WINDOWS_TERMINAL, 'I' },
 		SMenuItem{ F_PROPERTY_FILE, 'F' },
 	};
 
@@ -788,6 +789,7 @@ MATCHER(IsInitializedCommonSettingCustomMenu, "Checks if CommonSetting_CustomMen
 		SMenuItem{ F_OPEN_COMMAND_PROMPT_AS_ADMIN, 'w' },
 		SMenuItem{ F_OPEN_POWERSHELL, 'P' },
 		SMenuItem{ F_OPEN_POWERSHELL_AS_ADMIN, 'p' },
+		SMenuItem{ F_OPEN_WINDOWS_TERMINAL, 'I' },
 		SMenuItem{ F_0 },
 		SMenuItem{ F_GROUPCLOSE, 'G' },
 		SMenuItem{ F_TAB_CLOSEOTHER, 'O' },

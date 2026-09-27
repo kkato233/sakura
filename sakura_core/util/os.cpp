@@ -372,6 +372,22 @@ BOOL IsPowerShellAvailable(void)
 	}
 }
 
+BOOL IsWindowsTerminalAvailable(void)
+{
+	WCHAR szFileBuff[MAX_PATH];
+	LPWSTR lpFilePart = nullptr;
+
+	DWORD ret = ::SearchPath(
+		nullptr,			// 検索パス
+		L"wt.exe",			// ファイル名
+		nullptr,			// ファイルの拡張子
+		MAX_PATH,			// バッファのサイズ
+		szFileBuff,			// 見つかったファイル名を格納するバッファ
+		&lpFilePart			// ファイルコンポーネント
+	);
+	return ret != 0 && lpFilePart != nullptr;
+}
+
 /*!
 	@brief IMEのオープン状態を設定する
 	@param hWnd 設定対象のウィンドウハンドル

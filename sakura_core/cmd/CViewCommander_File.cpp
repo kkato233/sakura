@@ -645,6 +645,30 @@ void CViewCommander::Command_OPEN_POWERSHELL(BOOL isAdmin)
 	}
 }
 
+/* Windows Terminalを開く */
+void CViewCommander::Command_OPEN_WINDOWS_TERMINAL()
+{
+	if (!GetDocument()->m_cDocFile.GetFilePathClass().IsValidPath()) {
+		ErrorBeep();
+		return;
+	}
+
+	std::wstring strFolder(GetDocument()->m_cDocFile.GetFilePathClass().GetDirPath());
+
+	SHELLEXECUTEINFOW execInfo{ sizeof(SHELLEXECUTEINFOW) };
+	execInfo.fMask = SEE_MASK_DEFAULT;
+	execInfo.lpVerb = L"open";
+	execInfo.lpFile = L"wt.exe";
+	// Use the launch directory without embedding a trailing backslash in a quoted argument.
+	execInfo.lpParameters = L"-d .";
+	execInfo.lpDirectory = strFolder.c_str();
+	execInfo.nShow = SW_SHOWNORMAL;
+
+	if (!Shell32::getInstance()->ShellExecuteExW(&execInfo)) {
+		ErrorBeep();
+	}
+}
+
 /* 編集の全終了 */	// 2007.02.13 ryoji 追加
 void CViewCommander::Command_EXITALLEDITORS( void )
 {

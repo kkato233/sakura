@@ -203,6 +203,11 @@ private:
 BOOL IsPowerShellAvailable(void);
 
 /*!
+	@brief Windows Terminal が利用可能か判定する
+*/
+BOOL IsWindowsTerminalAvailable(void);
+
+/*!
 	@brief IMEのオープン状態を設定する
 	@param hWnd 設定対象のウィンドウハンドル
 	@param bOpen 設定するオープン状態

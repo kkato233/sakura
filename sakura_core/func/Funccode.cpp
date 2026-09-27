@@ -107,6 +107,7 @@ const EFunctionCode pnFuncList_File[] = {	//Oct. 16, 2000 JEPRO 変数名変更(
 	F_OPEN_COMMAND_PROMPT_AS_ADMIN	,	//管理者としてコマンドプロンプトを開く
 	F_OPEN_POWERSHELL	        ,	//PowerShellを開く
 	F_OPEN_POWERSHELL_AS_ADMIN	,	//管理者としてPowerShellを開く
+	F_OPEN_WINDOWS_TERMINAL		,	//Windows Terminalを開く
 	F_PROFILEMGR		,	//プロファイルマネージャ
 	F_EXITALLEDITORS	,	//編集の全終了	// 2007.02.13 ryoji F_WIN_CLOSEALL→F_EXITALLEDITORS
 	F_EXITALL				//サクラエディタの全終了	//Dec. 27, 2000 JEPRO 追加
@@ -598,6 +599,7 @@ int FuncID_To_HelpContextID( EFunctionCode nFuncID )
 	case F_OPEN_COMMAND_PROMPT_AS_ADMIN:	return HLP000377;	//管理者としてコマンドプロンプトを開く
 	case F_OPEN_POWERSHELL:				return HLP000378;	//PowerShellを開く
 	case F_OPEN_POWERSHELL_AS_ADMIN:	return HLP000379;	//管理者としてPowerShellを開く
+	case F_OPEN_WINDOWS_TERMINAL:		return HLP000381;	//Windows Terminalを開く
 	case F_PROFILEMGR:			return HLP000363;			//プロファイルマネージャ
 
 	case F_EXITALLEDITORS:	return HLP000030;				//編集の全終了	// 2007.02.13 ryoji 追加
@@ -1204,6 +1206,13 @@ bool IsFuncEnable( const CEditDoc* pcEditDoc, const DLLSHAREDATA* pShareData, EF
 			return false;
 		}
 		return IsPowerShellAvailable();
+
+	case F_OPEN_WINDOWS_TERMINAL:		//Windows Terminalを開く
+		if (!pcEditDoc->m_cDocFile.GetFilePathClass().IsValidPath())
+		{
+			return false;
+		}
+		return IsWindowsTerminalAvailable();
 
 	case F_JUMPHIST_PREV:	//	移動履歴: 前へ
 		if( GetEditWnd().GetActiveView().m_cHistory->CheckPrev() )
