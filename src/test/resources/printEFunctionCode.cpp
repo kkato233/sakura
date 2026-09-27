@@ -76,6 +76,7 @@ void PrintTo(EFunctionCode eFuncCode, std::ostream* os)
 	case F_OPEN_COMMAND_PROMPT_AS_ADMIN: *os << "F_OPEN_COMMAND_PROMPT_AS_ADMIN"; break;
 	case F_OPEN_POWERSHELL: *os << "F_OPEN_POWERSHELL"; break;
 	case F_OPEN_POWERSHELL_AS_ADMIN: *os << "F_OPEN_POWERSHELL_AS_ADMIN"; break;
+	case F_OPEN_WINDOWS_TERMINAL: *os << "F_OPEN_WINDOWS_TERMINAL"; break;
 	case F_WCHAR: *os << "F_WCHAR"; break;
 	case F_IME_CHAR: *os << "F_IME_CHAR"; break;
 	case F_UNDO: *os << "F_UNDO"; break;

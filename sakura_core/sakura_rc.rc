@@ -2305,6 +2305,7 @@ STRINGTABLE
 BEGIN
     F_OPEN_POWERSHELL       "PowerShellを開く"
     F_OPEN_POWERSHELL_AS_ADMIN "管理者としてPowerShellを開く"
+    F_OPEN_WINDOWS_TERMINAL "Windows Terminalを開く"
 END
 
 STRINGTABLE

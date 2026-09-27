@@ -645,6 +645,33 @@ void CViewCommander::Command_OPEN_POWERSHELL(BOOL isAdmin)
 	}
 }
 
+/* Windows Terminalを開く */
+void CViewCommander::Command_OPEN_WINDOWS_TERMINAL()
+{
+	if (!GetDocument()->m_cDocFile.GetFilePathClass().IsValidPath()) {
+		ErrorBeep();
+		return;
+	}
+
+	std::wstring strFolder(GetDocument()->m_cDocFile.GetFilePathClass().GetDirPath());
+
+	CNativeW terminalParam;
+	terminalParam.AppendStringF(L"-d \"%s\"", strFolder.c_str());
+
+	auto hInstance = ::ShellExecuteW(
+		nullptr,
+		L"open",
+		L"wt.exe",
+		terminalParam.GetStringPtr(),
+		strFolder.c_str(),
+		SW_SHOWNORMAL
+	);
+	// If the function succeeds, it returns a value greater than 32.
+	if (hInstance <= (decltype(hInstance))32) {
+		ErrorBeep();
+	}
+}
+
 /* 編集の全終了 */	// 2007.02.13 ryoji 追加
 void CViewCommander::Command_EXITALLEDITORS( void )
 {

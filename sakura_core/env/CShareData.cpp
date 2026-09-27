@@ -1345,6 +1345,9 @@ void CShareData::InitPopupMenu([[maybe_unused]] DLLSHAREDATA* pShareData)
 	rMenu.m_nCustMenuItemFuncArr[0][n] = F_OPEN_POWERSHELL_AS_ADMIN;
 	rMenu.m_nCustMenuItemKeyArr[0][n] = 'p';
 	n++;
+	rMenu.m_nCustMenuItemFuncArr[0][n] = F_OPEN_WINDOWS_TERMINAL;
+	rMenu.m_nCustMenuItemKeyArr[0][n] = 'I';
+	n++;
 	rMenu.m_nCustMenuItemFuncArr[0][n] = F_PROPERTY_FILE;
 	rMenu.m_nCustMenuItemKeyArr [0][n] = 'F';		//Nov. 9, 2000 JEPRO 「やり直し」とバッティングしていたアクセスキーを変更(R→F)
 	n++;
@@ -1416,6 +1419,9 @@ void CShareData::InitPopupMenu([[maybe_unused]] DLLSHAREDATA* pShareData)
 	n++;
 	rMenu.m_nCustMenuItemFuncArr[CUSTMENU_INDEX_FOR_TABWND][n] = F_OPEN_POWERSHELL_AS_ADMIN;
 	rMenu.m_nCustMenuItemKeyArr[CUSTMENU_INDEX_FOR_TABWND][n]  = 'p';
+	n++;
+	rMenu.m_nCustMenuItemFuncArr[CUSTMENU_INDEX_FOR_TABWND][n] = F_OPEN_WINDOWS_TERMINAL;
+	rMenu.m_nCustMenuItemKeyArr[CUSTMENU_INDEX_FOR_TABWND][n]  = 'I';
 	n++;
 	rMenu.m_nCustMenuItemFuncArr[CUSTMENU_INDEX_FOR_TABWND][n] = F_0;
 	rMenu.m_nCustMenuItemKeyArr [CUSTMENU_INDEX_FOR_TABWND][n] = '\0';

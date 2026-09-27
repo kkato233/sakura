@@ -2361,6 +2361,7 @@ STRINGTABLE
 BEGIN
     F_OPEN_POWERSHELL       "Open PowerShell"
     F_OPEN_POWERSHELL_AS_ADMIN "Open PowerShell As Admin"
+    F_OPEN_WINDOWS_TERMINAL "Open Windows Terminal"
 END
 
 STRINGTABLE
