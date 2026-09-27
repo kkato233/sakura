@@ -43,6 +43,7 @@
 #include "plugin/CPluginManager.h"
 #include "prop/CPropCommon.h"
 #include "typeprop/CPropTypes.h"
+#include "uiparts/CMenuDrawer.h"
 #include "util/shell.h"
 
 #include <fstream>
@@ -1992,6 +1993,16 @@ TEST_F(EditWndTest, Command_OPEN_WINDOWS_TERMINAL101)
 	pcEditDoc->m_cDocFile.SetFilePath(L"");
 	EXPECT_CALL(shell32, ShellExecuteExW(_)).Times(0);
 	pcEditWnd->GetActiveView().GetCommander().Command_OPEN_WINDOWS_TERMINAL();
+}
+
+TEST_F(EditWndTest, WindowsTerminalMenuIcon)
+{
+	const CMenuDrawer menu;
+	EXPECT_EQ(menu.FindToolbarNoFromCommandId(F_OPEN_WINDOWS_TERMINAL), 59);
+	EXPECT_EQ(menu.GetIconIdByFuncId(F_OPEN_WINDOWS_TERMINAL), 58);
+	EXPECT_EQ(menu.getButton(59).idCommand, F_OPEN_WINDOWS_TERMINAL);
+	EXPECT_EQ(menu.GetIconIdByFuncId(F_OPEN_POWERSHELL), 66);
+	EXPECT_EQ(menu.GetIconIdByFuncId(F_OPEN_POWERSHELL_AS_ADMIN), 82);
 }
 
 /*!
