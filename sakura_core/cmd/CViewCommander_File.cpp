@@ -655,19 +655,16 @@ void CViewCommander::Command_OPEN_WINDOWS_TERMINAL()
 
 	std::wstring strFolder(GetDocument()->m_cDocFile.GetFilePathClass().GetDirPath());
 
-	CNativeW terminalParam;
-	terminalParam.AppendStringF(L"-d \"%s\"", strFolder.c_str());
+	SHELLEXECUTEINFOW execInfo{ sizeof(SHELLEXECUTEINFOW) };
+	execInfo.fMask = SEE_MASK_DEFAULT;
+	execInfo.lpVerb = L"open";
+	execInfo.lpFile = L"wt.exe";
+	// Use the launch directory without embedding a trailing backslash in a quoted argument.
+	execInfo.lpParameters = L"-d .";
+	execInfo.lpDirectory = strFolder.c_str();
+	execInfo.nShow = SW_SHOWNORMAL;
 
-	auto hInstance = ::ShellExecuteW(
-		nullptr,
-		L"open",
-		L"wt.exe",
-		terminalParam.GetStringPtr(),
-		strFolder.c_str(),
-		SW_SHOWNORMAL
-	);
-	// If the function succeeds, it returns a value greater than 32.
-	if (hInstance <= (decltype(hInstance))32) {
+	if (!Shell32::getInstance()->ShellExecuteExW(&execInfo)) {
 		ErrorBeep();
 	}
 }

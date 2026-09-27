@@ -1954,6 +1954,46 @@ TEST_F(EditWndTest, Command_OPEN_COMMAND_PROMPT101)
 	FORWARD_WM_COMMAND(hWnd, F_OPEN_COMMAND_PROMPT, nullptr, BN_CLICKED, pcEditWnd->DispatchEvent);
 }
 
+TEST_F(EditWndTest, Command_OPEN_WINDOWS_TERMINAL001)
+{
+	Shell32::setInstance<MockShell32>();
+	auto& shell32 = *static_cast<MockShell32*>(Shell32::getInstance());
+	const struct {
+		LPCWSTR file;
+		LPCWSTR directory;
+	} cases[] = {
+		{ L"C:\\work\\test.txt", L"C:\\work\\" },
+		{ L"C:\\test.txt", L"C:\\" },
+		{ L"C:\\日本語 folder\\test.txt", L"C:\\日本語 folder\\" },
+		{ L"C:\\a'b;folder\\test.txt", L"C:\\a'b;folder\\" },
+		{ L"\\\\server\\share\\test.txt", L"\\\\server\\share\\" },
+	};
+
+	for (const auto& test : cases) {
+		SCOPED_TRACE(test.file);
+		pcEditDoc->m_cDocFile.SetFilePath(test.file);
+		EXPECT_CALL(shell32, ShellExecuteExW(_))
+			.WillOnce([&](SHELLEXECUTEINFOW* info) {
+				EXPECT_THAT(info->lpFile, StrEq(L"wt.exe"));
+				EXPECT_THAT(info->lpVerb, StrEq(L"open"));
+				EXPECT_THAT(info->lpParameters, StrEq(L"-d ."));
+				EXPECT_THAT(info->lpDirectory, StrEq(test.directory));
+				EXPECT_EQ(info->nShow, SW_SHOWNORMAL);
+				return TRUE;
+			});
+		pcEditWnd->GetActiveView().GetCommander().Command_OPEN_WINDOWS_TERMINAL();
+	}
+}
+
+TEST_F(EditWndTest, Command_OPEN_WINDOWS_TERMINAL101)
+{
+	Shell32::setInstance<MockShell32>();
+	auto& shell32 = *static_cast<MockShell32*>(Shell32::getInstance());
+	pcEditDoc->m_cDocFile.SetFilePath(L"");
+	EXPECT_CALL(shell32, ShellExecuteExW(_)).Times(0);
+	pcEditWnd->GetActiveView().GetCommander().Command_OPEN_WINDOWS_TERMINAL();
+}
+
 /*!
  * コマンド：タグジャンプ
  */
